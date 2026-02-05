@@ -119,6 +119,7 @@ Overall, the system is faithful to the evidence retrieved, but must be aware tha
 | Q1    | Hybrid Retrieval | 1.0  | 0.6   | High         |
 | Q2    | Hybrid Retrieval | 0.8  | 0.545 | Medium       |
 | Q3    | Hybrid Retrieval | 0.81 | 1.0   | High         |
+
 The generated answers are mostly faithful to the source documents. 
 For Q1 and Q3, the answers directly reflect the text in the PDFs, including rent amounts, late fees, and pet rules. 
 For Q2, some details about the security deposit interest are partially missing, so the faithfulness is medium. 
