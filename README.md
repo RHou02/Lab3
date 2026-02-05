@@ -3,12 +3,14 @@
 Dataset description:
 This lab uses rental agreement PDFs and related images to simulate a multimodal compliance auditing scenario. The dataset consists of two PDF lease agreements (lease_template_1.pdf and lease_template_2.pdf) and five figure images (f1.PNG to f5.PNG). The PDFs contain typical residential lease clauses, such as rent, late fees, security deposits, and pet policies. The images are screenshots of tables or form fields from the leases, which provide additional context for questions about amounts or rules.
 All documents are text and image multimodal, allowing retrieval of both textual chunks and visual evidence. This dataset is directly relevant to the project because it allows testing of a multimodal RAG pipeline on structured contract information.
+
 <img width="364" height="515" alt="图片" src="https://github.com/user-attachments/assets/fedd5a8d-2dee-4553-9523-fabab8ec2545" />
 
 Total text chunks: 18
 Total images: 5
 Sample text chunk: lease_template_1.pdf::p1 STANDARD RESIDENTIAL LEASE AGREEMENT 1. THE PARTIES. This Residential Lease Agreement (“Agreement”) is made on the undersigned date by and between: Landlord Landlord's Name: [LANDL
 Sample image item: ImageItem(item_id='f1.PNG', path='project_data_mm/figures/f1.PNG', caption='f1')
+
 <img width="1318" height="259" alt="图片" src="https://github.com/user-attachments/assets/1b802d7a-fda2-4ea2-b163-8f7070202d2a" />
 
 Queries:
@@ -31,6 +33,7 @@ Top evidence includes text discussing pet permissions, pet rent, and additional 
 Evidence highlights any mention of interest paid on the security deposit. Both lease pages and selected figures are included to support the answer.
 Text chunks are directly retrieved; images are included by relevance.
 Fusion alpha = 0.5 gives equal weight to text and image evidence.
+
 <img width="1244" height="229" alt="图片" src="https://github.com/user-attachments/assets/992311ee-0793-4488-afda-421ece17b5ae" />
 
 ================================================================================
@@ -59,6 +62,7 @@ Grounded answer (extractive):
 [TEXT | lease_template_1.pdf::p10 | fused=0.500] duration of the Term and any renewals thereof. Failure to maintain the required insurance constitutes a breach of this Agreement and may result in termination of tenancy and eviction under local housing laws. iv. Landlord’s Insurance. Tenant acknowledges that 
 [IMAGE | f1.PNG | fused=0.500] caption=f1
 Images: ['f1.PNG', 'f2.PNG', 'f3.PNG']
+
 <img width="1321" height="630" alt="图片" src="https://github.com/user-attachments/assets/1fbd348f-9c09-42f4-8f90-9eb35e47b515" />
 
 Retrieval Evaluation
@@ -69,7 +73,9 @@ Relevant text chunks are determined by the must_have_keywords in each query’s 
 | Q1 | 1.0 | 0.6   | 15                    |
 | Q2 | 0.8 | 0.545 | 11                    |
 | Q3 | 0.8 | 1.0   | 8                     |
+
 <img width="617" height="176" alt="图片" src="https://github.com/user-attachments/assets/5367ebaa-3746-41d8-898e-79c7c46e2f00" />
+
 The results show that our system can effectively retrieve relevant chunks from the lease agreements, with high precision and reasonable recall.
 
 Ablation Study
@@ -85,7 +91,9 @@ I conducted a quick ablation study to see how changing TOP_K_TEXT affects retrie
 | Q3    | 2          | 0.8 | 0.95  |
 | Q3    | 5          | 0.8 | 1.0   |
 | Q3    | 10         | 0.8 | 1.0   |
+
 <img width="654" height="412" alt="图片" src="https://github.com/user-attachments/assets/f95e064c-e838-4927-8d4f-b497211e395f" />
+
 Observations:
 Increasing TOP_K_TEXT slightly improves recall for Q1, while precision remains stable.
 For Q2, both precision and recall are stable across different TOP_K_TEXT.
